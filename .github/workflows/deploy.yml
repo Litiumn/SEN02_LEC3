@@ -9,25 +9,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy to Azure VM via SSH
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy to Ubuntu VM via SSH
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.VM_HOST }}
           username: azureuser
           key: ${{ secrets.VM_SSH_KEY }}
-          port: 22
           script: |
             set -e
 
+            # Navigate to your project folder
             cd /home/azureuser/stock_dashboard_proj
 
+            # Pull latest changes from GitHub
             git pull origin main
 
-            source /home/azureuser/venvs/project_env/bin/activate
+            # Install/update dependencies using the venv's pip
+            /home/azureuser/venvs/project_env/bin/pip install --upgrade -r requirements.txt
 
-            pip install -r requirements.txt
+            # Run the Python script using the venv's Python
+            /home/azureuser/venvs/project_env/bin/python stock_dashboard.py
 
-            python stock_dashboard.py
-
+            # Log deployment timestamp
             echo "Deployed at $(date)" >> deploy.log
+
 
