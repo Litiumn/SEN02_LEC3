@@ -157,6 +157,7 @@ html = f"""<!DOCTYPE html>
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            table-layout: fixed;
         }}
         
         thead {{
@@ -171,6 +172,22 @@ html = f"""<!DOCTYPE html>
             cursor: pointer;
             user-select: none;
             position: relative;
+        }}
+        
+        th:nth-child(1) {{
+            width: 20%;
+        }}
+        
+        th:nth-child(2) {{
+            width: 20%;
+        }}
+        
+        th:nth-child(3) {{
+            width: 30%;
+        }}
+        
+        th:nth-child(4) {{
+            width: 30%;
         }}
         
         th:hover {{
@@ -203,9 +220,6 @@ html = f"""<!DOCTYPE html>
         
         .trend {{
             font-weight: bold;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
             white-space: nowrap;
         }}
         
@@ -219,6 +233,7 @@ html = f"""<!DOCTYPE html>
         
         .arrow {{
             font-size: 1.2em;
+            margin-right: 5px;
         }}
         
         .no-results {{
