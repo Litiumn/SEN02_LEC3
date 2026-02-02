@@ -203,9 +203,10 @@ html = f"""<!DOCTYPE html>
         
         .trend {{
             font-weight: bold;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 5px;
+            white-space: nowrap;
         }}
         
         .trend.up {{
