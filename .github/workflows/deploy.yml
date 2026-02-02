@@ -19,7 +19,7 @@ jobs:
           script: |
             set -e
 
-            cd /home/azureuser/stock_board_proj
+            cd /home/azureuser/stock_dashboard_proj
 
             git pull origin main
 
