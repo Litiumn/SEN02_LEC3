@@ -54,4 +54,4 @@ with open("/var/www/html/index.html", "w") as f:
     f.write(html)
 print("Done! index.html created.")
 
-# Wows
+# 6 or 7
