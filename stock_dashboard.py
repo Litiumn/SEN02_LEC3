@@ -53,3 +53,5 @@ html += "</table></body></html>"
 with open("/var/www/html/index.html", "w") as f:
     f.write(html)
 print("Done! index.html created.")
+
+# Test
