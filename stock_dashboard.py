@@ -310,15 +310,15 @@ html = f"""<!DOCTYPE html>
             
             tbody.innerHTML = pageData.map(stock => `
                 <tr>
-                    <td class="symbol">${{stock.symbol}}</td>
-                    <td class="price">$${{stock.price.toFixed(2)}}</td>
-                    <td class="trend ${{stock.direction}}">
-                        <span class="arrow">${{stock.direction === 'up' ? '▲' : '▼'}}</span>
-                        ${{Math.abs(stock.percent).toFixed(2)}}%
+                    <td class="symbol">${stock.symbol}</td>
+                    <td class="price">$${stock.price.toFixed(2)}</td>
+                    <td class="trend ${stock.direction}">
+                        <span class="arrow">${stock.direction === 'up' ? '▲' : '▼'}</span>
+                        ${Math.abs(stock.percent).toFixed(2)}%
                     </td>
-                    <td class="trend ${{stock.direction}}">
-                        <span class="arrow">${{stock.direction === 'up' ? '▲' : '▼'}}</span>
-                        ${{Math.abs(stock.change).toFixed(2)}}
+                    <td class="trend ${stock.direction}">
+                        <span class="arrow">${stock.direction === 'up' ? '▲' : '▼'}</span>
+                        ${Math.abs(stock.change).toFixed(2)}
                     </td>
                 </tr>
             `).join('');
