@@ -303,7 +303,7 @@ html = f"""<!DOCTYPE html>
                     </td>
                     <td class="trend ${{stock.direction}}">
                         <span class="arrow">${{stock.direction === 'up' ? '▲' : '▼'}}</span>
-                        ${{Math.abs(stock.percent).toFixed(2)}}%
+                        {{Math.abs(stock.percent).toFixed(2)}}%
                     </td>
                 </tr>
             `).join('');
