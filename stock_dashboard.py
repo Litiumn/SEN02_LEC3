@@ -4,7 +4,7 @@ from datetime import datetime
 # 1. Define stocks to track
 tickers = ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'NVDA', 'TSLA', 'META']
 
-# 2. HTML Header
+# 2. HTML Headers
 html = """
 <html>
 <head>
