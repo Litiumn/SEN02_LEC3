@@ -72,9 +72,14 @@ html = f"""<!DOCTYPE html>
             color: #333;
             margin-bottom: 10px;
             font-size: 2.5em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
         }}
-        
-        h1 span {{
+
+        /* This fixes the logo being blocked by the gradient */
+        .gradient-text {{
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -161,6 +166,11 @@ html = f"""<!DOCTYPE html>
             user-select: none;
             position: relative;
         }}
+
+        /* Right align numerical headers */
+        th:nth-child(2), th:nth-child(3), th:nth-child(4) {{
+            text-align: right;
+        }}
         
         th:hover {{
             background: rgba(255,255,255,0.1);
@@ -188,13 +198,16 @@ html = f"""<!DOCTYPE html>
         .price {{
             font-size: 1.1em;
             color: #333;
+            text-align: right;
         }}
         
         .trend {{
             font-weight: bold;
             display: flex;
             align-items: center;
+            justify-content: flex-end;
             gap: 5px;
+            white-space: nowrap; /* Prevents stacking */
         }}
         
         .trend.up {{
@@ -245,7 +258,10 @@ html = f"""<!DOCTYPE html>
 </head>
 <body>
     <div class="container">
-        <h1>📈 <span>Tech Trend Tracker</span></h1>
+        <h1>
+            <span class="logo">📈</span>
+            <span class="gradient-text">Tech Trend Tracker</span>
+        </h1>
         <p class="update-time">Last Updated: {datetime.now().strftime("%B %d, %Y at %H:%M:%S UTC")}</p>
         
         <div class="controls">
@@ -262,8 +278,8 @@ html = f"""<!DOCTYPE html>
                 <tr>
                     <th onclick="sortTable('symbol')">Stock Symbol</th>
                     <th onclick="sortTable('price')">Price ($)</th>
-                    <th onclick="sortTable('percent')">Change (%)</th>
                     <th onclick="sortTable('change')">Change ($)</th>
+                    <th onclick="sortTable('percent')">Change (%)</th>
                 </tr>
             </thead>
             <tbody id="tableBody">
@@ -302,11 +318,11 @@ html = f"""<!DOCTYPE html>
                     <td class="price">$${{stock.price.toFixed(2)}}</td>
                     <td class="trend ${{stock.direction}}">
                         <span class="arrow">${{stock.direction === 'up' ? '▲' : '▼'}}</span>
-                        ${{Math.abs(stock.percent).toFixed(2)}}%
+                        <span>${{Math.abs(stock.change).toFixed(2)}}</span>
                     </td>
                     <td class="trend ${{stock.direction}}">
                         <span class="arrow">${{stock.direction === 'up' ? '▲' : '▼'}}</span>
-                        ${{Math.abs(stock.change).toFixed(2)}}
+                        <span>${{Math.abs(stock.percent).toFixed(2)}}%</span>
                     </td>
                 </tr>
             `).join('');
@@ -377,6 +393,6 @@ html = f"""<!DOCTYPE html>
 </html>"""
 
 # 4. Save to file
-with open("/var/www/html/index.html", "w", encoding='utf-8') as f:
+with open("index.html", "w", encoding='utf-8') as f:
     f.write(html)
-print("Done! index.html created with enhanced features.")
+print("Done! index.html created with fixed logo and column formatting.")
