@@ -72,6 +72,9 @@ html = f"""<!DOCTYPE html>
             color: #333;
             margin-bottom: 10px;
             font-size: 2.5em;
+        }}
+        
+        h1 span {{
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -242,7 +245,7 @@ html = f"""<!DOCTYPE html>
 </head>
 <body>
     <div class="container">
-        <h1>📈 Tech Trend Tracker</h1>
+        <h1>📈 <span>Tech Trend Tracker</span></h1>
         <p class="update-time">Last Updated: {datetime.now().strftime("%B %d, %Y at %H:%M:%S UTC")}</p>
         
         <div class="controls">
@@ -259,8 +262,8 @@ html = f"""<!DOCTYPE html>
                 <tr>
                     <th onclick="sortTable('symbol')">Stock Symbol</th>
                     <th onclick="sortTable('price')">Price ($)</th>
-                    <th onclick="sortTable('change')">Change ($)</th>
                     <th onclick="sortTable('percent')">Change (%)</th>
+                    <th onclick="sortTable('change')">Change ($)</th>
                 </tr>
             </thead>
             <tbody id="tableBody">
@@ -295,15 +298,15 @@ html = f"""<!DOCTYPE html>
             
             tbody.innerHTML = pageData.map(stock => `
                 <tr>
-                    <td class="symbol">${stock.symbol}</td>
-                    <td class="price">$${stock.price.toFixed(2)}</td>
-                    <td class="trend ${stock.direction}">
-                        <span class="arrow">${stock.direction === 'up' ? '▲' : '▼'}</span>
-                        ${Math.abs(stock.change).toFixed(2)}
+                    <td class="symbol">${{stock.symbol}}</td>
+                    <td class="price">$${{stock.price.toFixed(2)}}</td>
+                    <td class="trend ${{stock.direction}}">
+                        <span class="arrow">${{stock.direction === 'up' ? '▲' : '▼'}}</span>
+                        ${{Math.abs(stock.percent).toFixed(2)}}%
                     </td>
-                    <td class="trend ${stock.direction}">
-                        <span class="arrow">${stock.direction === 'up' ? '▲' : '▼'}</span>
-                        ${Math.abs(stock.percent).toFixed(2)}%
+                    <td class="trend ${{stock.direction}}">
+                        <span class="arrow">${{stock.direction === 'up' ? '▲' : '▼'}}</span>
+                        ${{Math.abs(stock.change).toFixed(2)}}
                     </td>
                 </tr>
             `).join('');
