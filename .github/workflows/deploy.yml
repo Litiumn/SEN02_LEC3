@@ -3,11 +3,6 @@ name: Deploy Stock Dashboard
 on:
   push:
     branches: [ main ]
-  schedule:
-    # Run every 5 minutes during market hours (9:30 AM - 4:00 PM EST, Mon-Fri)
-    # This runs at minutes 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55 of every hour
-    - cron: '*/5 * * * *'
-  workflow_dispatch:  # Allow manual trigger
 
 jobs:
   deploy:
